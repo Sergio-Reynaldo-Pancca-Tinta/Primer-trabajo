@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Modelado de Sistema Académico</title>
+    <style>
+        :root {
+            --primary-color: #1a4b8c;
+            --secondary-color: #c9a227;
+            --accent-color: #2e7d32;
+            --light-bg: #f5f7fa;
+            --text-color: #333;
+            --border-radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .infographic-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #0d2c5e);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .university-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .project-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 20px 0;
+            color: #dc3545; /* Color rojo */
+        }
+        
+        .team-name {
+            font-size: 1.6rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .intro-section {
+            padding: 40px;
+            background-color: var(--light-bg);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid var(--secondary-color);
+        }
+        
+        .intro-text {
+            font-size: 1.2rem;
+            text-align: justify;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .entities-section {
+            padding: 40px;
+        }
+        
+        .entities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+            margin-top: 35px;
+        }
+        
+        .entity-card {
+            border: 2px solid #e1e5e9;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            height: 520px; /* Aumentado para imágenes más grandes */
+        }
+        
+        .entity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .entity-header {
+            background: linear-gradient(135deg, var(--primary-color), #0d2c5e);
+            color: white;
+            padding: 20px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .entity-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .entity-description {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .image-container {
+            width: 100%;
+            height: 250px; /* Aumentado para imágenes más grandes */
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid #e9ecef;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Cambiado a contain para mostrar imagen completa */
+            transition: transform 0.5s ease;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.03);
+        }
+        
+        /* Estilos específicos para cada imagen según sus dimensiones */
+        .img-alumno img {
+            max-height: 180px; /* Para 1065x205 - prioriza ancho */
+        }
+        
+        .img-asignatura img {
+            max-height: 220px; /* Para 1056x598 - prioriza altura */
+        }
+        
+        .img-carga img {
+            max-height: 200px; /* Para 1049x401 */
+        }
+        
+        .img-carrera img {
+            max-height: 190px; /* Para 1063x376 */
+        }
+        
+        .img-docente img {
+            max-height: 160px; /* Para 1060x179 - muy ancha */
+        }
+        
+        .img-nota img {
+            max-height: 180px; /* Para 1079x220 */
+        }
+        
+        .entity-attributes {
+            font-size: 1rem;
+            color: #495057;
+            flex-grow: 1;
+        }
+        
+        .entity-attributes strong {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        
+        .entity-attributes p {
+            margin-bottom: 10px;
+            padding-left: 5px;
+        }
+        
+        .tools-section {
+            padding: 40px;
+            background-color: var(--light-bg);
+        }
+        
+        .tools-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 35px;
+            gap: 30px;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-top: 6px solid var(--secondary-color);
+            transition: transform 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tool-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .tool-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .tool-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .conclusions-section {
+            padding: 40px;
+        }
+        
+        .conclusion-item {
+            background-color: #e8f4fd;
+            border-left: 6px solid var(--primary-color);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .conclusion-item h3, .suggestion-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .suggestion-item {
+            background-color: #f0f7e9;
+            border-left: 6px solid var(--accent-color);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        .conclusion-item p, .suggestion-item p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), #0d2c5e);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .footer h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--secondary-color);
+        }
+        
+        .students-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .student {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px 30px;
+            border-radius: 35px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .course-info {
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+        
+        .year {
+            margin-top: 25px;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 1024px) {
+            .entities-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 25px;
+            }
+            
+            .entity-card {
+                height: 500px;
+            }
+            
+            .image-container {
+                height: 230px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header, .intro-section, .entities-section, .tools-section, .conclusions-section, .footer {
+                padding: 30px 25px;
+            }
+            
+            .project-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .entities-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .entity-card {
+                height: auto;
+                min-height: 520px;
+            }
+            
+            .tools-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tool-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .student {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .project-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .intro-text {
+                font-size: 1.1rem;
+            }
+            
+            .entity-card {
+                height: auto;
+                min-height: 500px;
+            }
+            
+            .image-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic-container">
+        <!-- Encabezado -->
+        <header class="header">
+            <div class="university-name">UNIVERSIDAD ANDINA DEL CUSCO</div>
+            <div style="font-size: 1.2rem; margin-bottom: 10px;">FACULTAD DE INGENIERÍA Y ARQUITECTURA</div>
+            <h1 class="project-title">MODELADO DE UN SISTEMA ACADÉMICO</h1>
+            <div class="team-name">Los Dog Chamos 2.0 ahora sí</div>
+        </header>
+        
+        <!-- Introducción -->
+        <section class="intro-section">
+            <h2 class="section-title">INTRODUCCIÓN</h2>
+            <p class="intro-text">Este documento describe el desarrollo del modelado conceptual de un Sistema Académico cuyo propósito principal es organizar, administrar y estructurar la información asociada a los procesos académicos fundamentales: gestión de alumnos, docentes, asignaturas, matrículas, calificaciones y períodos académicos.</p>
+            <p class="intro-text">Se identificaron las entidades principales del sistema y se definieron sus respectivas relaciones, permitiendo representar de forma clara y coherente la interacción entre los distintos componentes del entorno académico.</p>
+        </section>
+        
+        <!-- Entidades del Sistema -->
+        <section class="entities-section">
+            <h2 class="section-title">ENTIDADES DEL SISTEMA ACADÉMICO</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 10px;">Las siguientes son las entidades principales identificadas en el modelado del sistema. Cada entidad cuenta con una imagen de mayor tamaño para mejor visualización.</p>
+            
+            <div class="entities-grid">
+                <!-- Entidad 1: Alumno (1065x205) -->
+                <div class="entity-card">
+                    <div class="entity-header">ENTIDAD: ALUMNO</div>
+                    <div class="entity-content">
+                        <div class="image-container img-alumno">
+                            <img src="Alumno.png" alt="Entidad Alumno - Representación visual de estudiantes">
+                        </div>
+                        <p class="entity-description">Almacena información de los estudiantes matriculados en el sistema académico. Esta entidad es fundamental para el seguimiento académico de cada alumno.</p>
+                        <div class="entity-attributes">
+                            <p><strong>Atributos principales:</strong></p>
+                            <p>• <strong>CodAlumno</strong> - Clave primaria identificadora</p>
+                            <p>• <strong>APaterno, AMaterno, Nombres</strong> - Datos personales</p>
+                            <p>• <strong>Usuario</strong> - Correo electrónico institucional</p>
+                            <p>• <strong>CodCarrera</strong> - Clave foránea que relaciona con Carrera</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entidad 2: Docente (1060x179) -->
+                <div class="entity-card">
+                    <div class="entity-header">ENTIDAD: DOCENTE</div>
+                    <div class="entity-content">
+                        <div class="image-container img-docente">
+                            <img src="Docente.png" alt="Entidad Docente - Representación visual de profesores">
+                        </div>
+                        <p class="entity-description">Contiene información de los profesores que imparten asignaturas en el sistema. Gestiona los datos profesionales de los docentes.</p>
+                        <div class="entity-attributes">
+                            <p><strong>Atributos principales:</strong></p>
+                            <p>• <strong>CodDocente</strong> - Clave primaria identificadora</p>
+                            <p>• <strong>APaterno, AMaterno, Nombres</strong> - Datos personales</p>
+                            <p>• <strong>Usuario</strong> - Correo electrónico institucional</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entidad 3: Asignatura (1056x598) -->
+                <div class="entity-card">
+                    <div class="entity-header">ENTIDAD: ASIGNATURA</div>
+                    <div class="entity-content">
+                        <div class="image-container img-asignatura">
+                            <img src="Asignatura.png" alt="Entidad Asignatura - Representación visual de materias académicas">
+                        </div>
+                        <p class="entity-description">Define las materias o cursos que se imparten en el sistema académico. Incluye información sobre prerrequisitos y estructura curricular.</p>
+                        <div class="entity-attributes">
+                            <p><strong>Atributos principales:</strong></p>
+                            <p>• <strong>CodAsignatura</strong> - Clave primaria identificadora</p>
+                            <p>• <strong>Asignatura</strong> - Nombre completo de la materia</p>
+                            <p>• <strong>CodRequisito</strong> - Prerrequisito, clave foránea recursiva</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entidad 4: Carga Académica (1049x401) -->
+                <div class="entity-card">
+                    <div class="entity-header">ENTIDAD: CARGA ACADÉMICA</div>
+                    <div class="entity-content">
+                        <div class="image-container img-carga">
+                            <img src="Carga.png" alt="Entidad Carga Académica - Representación visual de asignación docente">
+                        </div>
+                        <p class="entity-description">Relaciona a los docentes con las asignaturas que imparten en un semestre específico. Gestiona la distribución de la carga docente.</p>
+                        <div class="entity-attributes">
+                            <p><strong>Atributos principales:</strong></p>
+                            <p>• <strong>IdCarga</strong> - Clave primaria identificadora</p>
+                            <p>• <strong>CodDocente</strong> - Clave foránea a Docente</p>
+                            <p>• <strong>CodAsignatura</strong> - Clave foránea a Asignatura</p>
+                            <p>• <strong>Semestre</strong> - Período académico (ej: 2010-I)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entidad 5: Nota (1079x220) -->
+                <div class="entity-card">
+                    <div class="entity-header">ENTIDAD: NOTA</div>
+                    <div class="entity-content">
+                        <div class="image-container img-nota">
+                            <img src="Nota.png" alt="Entidad Nota - Representación visual de calificaciones académicas">
+                        </div>
+                        <p class="entity-description">Registra las calificaciones de los alumnos en cada asignatura por semestre. Incluye notas parciales y finales.</p>
+                        <div class="entity-attributes">
+                            <p><strong>Atributos principales:</strong></p>
+                            <p>• <strong>IdNota</strong> - Clave primaria identificadora</p>
+                            <p>• <strong>CodAlumno</strong> - Clave foránea a Alumno</p>
+                            <p>• <strong>CodAsignatura</strong> - Clave foránea a Asignatura</p>
+                            <p>• <strong>Semestre</strong> - Período académico</p>
+                            <p>• <strong>Parcial1, Parcial2, NotaFinal</strong> - Calificaciones</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Entidad 6: Carrera (1063x376) -->
+                <div class="entity-card">
+                    <div class="entity-header">ENTIDAD: CARRERA</div>
+                    <div class="entity-content">
+                        <div class="image-container img-carrera">
+                            <img src="Carrera.png" alt="Entidad Carrera - Representación visual de programas académicos">
+                        </div>
+                        <p class="entity-description">Define las carreras profesionales ofrecidas por la institución. Representa los programas académicos disponibles.</p>
+                        <div class="entity-attributes">
+                            <p><strong>Atributos principales:</strong></p>
+                            <p>• <strong>CodCarrera</strong> - Clave primaria identificadora</p>
+                            <p>• <strong>Carrera</strong> - Nombre completo de la carrera</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Herramientas Utilizadas -->
+        <section class="tools-section">
+            <h2 class="section-title">HERRAMIENTAS UTILIZADAS</h2>
+            <p style="font-size: 1.2rem;">Para el desarrollo del modelo de sistema académico se utilizaron las siguientes herramientas tecnológicas:</p>
+            
+            <div class="tools-container">
+                <div class="tool-card">
+                    <div class="tool-icon">📊</div>
+                    <div class="tool-name">Microsoft Excel</div>
+                    <p>Utilizado para crear y organizar las tablas de datos de cada entidad del sistema académico. Permitió estructurar la información de manera ordenada.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🔗</div>
+                    <div class="tool-name">Power Pivot</div>
+                    <p>Herramienta para visualizar y analizar las relaciones entre las entidades mediante diagramas de datos. Facilitó el modelado de relaciones.</p>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">📈</div>
+                    <div class="tool-name">Modelado de Datos</div>
+                    <p>Metodología aplicada para identificar entidades, atributos y relaciones del sistema académico. Base teórica del desarrollo.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Conclusiones y Sugerencias -->
+        <section class="conclusions-section">
+            <h2 class="section-title">CONCLUSIONES Y SUGERENCIAS</h2>
+            
+            <div class="conclusion-item">
+                <h3>Conclusiones</h3>
+                <p>El uso de Microsoft Excel junto con Power Pivot permitió crear un modelo de datos organizado y funcional, facilitando la identificación de entidades, atributos y relaciones necesarias para representar los procesos académicos. La visualización del diagrama de relaciones ayudó a comprender de manera clara la interacción entre las entidades, especialmente las relaciones de uno a muchos y muchos a uno, fortaleciendo el aprendizaje sobre modelado de datos y gestión de información.</p>
+            </div>
+            
+            <div class="suggestion-item">
+                <h3>Sugerencias</h3>
+                <p>Se recomienda ampliar el sistema incorporando nuevas entidades o atributos que permitan cubrir más procesos académicos, así como implementar el modelo en un gestor de bases de datos para mejorar el rendimiento, la seguridad y la escalabilidad. Además, se sugiere continuar profundizando en el uso de Power Pivot y otras herramientas de análisis para optimizar la visualización y el manejo de la información académica.</p>
+            </div>
+        </section>
+        
+        <!-- Pie de página -->
+        <footer class="footer">
+            <h3>EQUIPO DE DESARROLLO</h3>
+            <div class="students-list">
+                <div class="student">Andia Palomino Rodrigo Inti</div>
+                <div class="student">Mamani Apaza Renato Aldair</div>
+                <div class="student">Pancca Tinta Sergio Reynaldo</div>
+                <div class="student">Ramos Hancco Diego Alonso</div>
+            </div>
+            
+            <div class="course-info">Curso: Modelado de Base de Datos</div>
+            <div class="course-info">Docente: Hugo Espetia Huamanga</div>
+            <div class="year">Cusco - Perú 2026</div>
+        </footer>
+    </div>
+
+    <script>
+        // Script para manejar errores de carga de imágenes
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.image-container img');
+            const dimensions = {
+                'Alumno.png': '1065x205',
+                'Docente.png': '1060x179',
+                'Asignatura.png': '1056x598',
+                'Carga.png': '1049x401',
+                'Nota.png': '1079x220',
+                'Carrera.png': '1063x376'
+            };
+            
+            images.forEach(img => {
+                img.onerror = function() {
+                    console.error(`Error al cargar la imagen: ${this.src}`);
+                    
+                    const container = this.parentElement;
+                    const fileName = this.src.split('/').pop();
+                    const expectedDimensions = dimensions[fileName] || 'Dimensiones desconocidas';
+                    
+                    container.innerHTML = `
+                        <div style="width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(135deg, #f8f9fa, #e9ecef); padding:20px;">
+                            <div style="font-size:3rem; color:#6c757d; margin-bottom:15px;">
+                                📷
+                            </div>
+                            <div style="text-align:center; color:#495057;">
+                                <div style="font-weight:600; font-size:1.1rem; margin-bottom:10px;">
+                                    Imagen no cargada
+                                </div>
+                                <div style="font-size:0.85rem; color:#6c757d;">
+                                    Archivo: <strong>${fileName}</strong><br>
+                                    Dimensiones: ${expectedDimensions}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.style.border = '3px dashed #dc3545';
+                    container.style.backgroundColor = '#f8d7da';
+                };
+                
+                img.onload = function() {
+                    console.log(`✓ Imagen cargada: ${this.src.split('/').pop()}`);
+                    this.parentElement.style.border = '3px solid #28a745';
+                };
+            });
+            
+            // Mostrar información de dimensiones
+            setTimeout(() => {
+                images.forEach(img => {
+                    if (img.complete && img.naturalWidth > 0) {
+                        const fileName = img.src.split('/').pop();
+                        const expected = dimensions[fileName];
+                        console.log(`📐 ${fileName}: ${img.naturalWidth}x${img.naturalHeight}px (Esperado: ${expected})`);
+                    }
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
